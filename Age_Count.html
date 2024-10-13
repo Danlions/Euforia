@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hitung Umur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e2e2e2;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hitung Umur</h1>
+        <p>Masukkan Nama dan Tanggal Lahir Anda:</p>
+        
+        <label for="nama">Nama:</label>
+        <input type="text" id="nama" placeholder="Masukkan nama kamu"><br><br>
+        
+        <label for="tanggal">Tanggal Lahir:</label>
+        <input type="number" id="tanggal" min="1" max="31" placeholder="1-31"><br><br>
+        
+        <label for="bulan">Bulan Lahir:</label>
+        <input type="number" id="bulan" min="1" max="12" placeholder="1-12"><br><br>
+        
+        <label for="tahun">Tahun Lahir:</label>
+        <input type="number" id="tahun" placeholder="Masukkan tahun lahir"><br><br>
+        
+        <button onclick="hitungUmur()">Hitung Umur</button>
+
+        <div class="result" id="result">
+            <!-- Hasil perhitungan akan muncul di sini -->
+        </div>
+    </div>
+
+    <script>
+        function hitungUmur() {
+            // Mengambil input dari form
+            const nama = document.getElementById('nama').value;
+            const tanggal = parseInt(document.getElementById('tanggal').value);
+            const bulan = parseInt(document.getElementById('bulan').value);
+            const tahun = parseInt(document.getElementById('tahun').value);
+
+            if (!nama || !tanggal || !bulan || !tahun) {
+                alert("Semua field harus diisi!");
+                return;
+            }
+
+            // Mendapatkan tanggal hari ini
+            const today = new Date();
+            const hariIni = today.getDate();
+            const bulanIni = today.getMonth() + 1; // Bulan dimulai dari 0 di JavaScript
+            const tahunIni = today.getFullYear();
+
+            // Menghitung usia dalam tahun, bulan, dan hari
+            let usiaTahun = tahunIni - tahun;
+            let usiaBulan = bulanIni - bulan;
+            if (usiaBulan < 0) {
+                usiaTahun--;
+                usiaBulan += 12;
+            }
+
+            let usiaHari = hariIni - tanggal;
+            if (usiaHari < 0) {
+                if (usiaBulan == 0) {
+                    usiaTahun--;
+                    usiaBulan = 11;
+                } else {
+                    usiaBulan--;
+                }
+                usiaHari += 30; // Asumsi 30 hari per bulan
+            }
+
+            // Menampilkan hasil
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `
+                <p>Halo ${nama},</p>
+                <p>Anda lahir pada: ${tanggal}-${bulan}-${tahun}</p>
+                <p>Anda telah hidup selama: ${usiaTahun} tahun, ${usiaBulan} bulan, dan ${usiaHari} hari.</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

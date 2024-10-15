@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+int main () {
+
+    float tugas,uts,uas;
+    int valid; 
+
+    do {
+        printf("Nilai Tugas: "); valid = scanf("%f",&tugas);
+
+        if (!valid) {  // Jika input bukan angka (misal huruf atau simbol)
+            printf("Input tidak valid. Harus berupa angka. Coba lagi.\n");
+            while (getchar() != '\n');  // Membersihkan buffer input
+        } else if (tugas > 100) {  // Jika angka melebihi batas 100
+            printf("Angka melebihi batas maksimal 100. Coba lagi.\n");
+        }
+    } while (!valid || tugas > 100);
+
+    do {
+        printf("Nilai UTS: "); valid = scanf("%f",&uts);
+
+    if (!valid) {
+            printf("Input tidak valid. Harus berupa angka. Coba lagi.\n");
+            while (getchar() != '\n');
+        } else if (uts > 100) {
+            printf("Angka melebihi batas maksimal 100. Coba lagi.\n");
+        }
+    }
+    while (!valid || uts > 100);
+
+    do{
+        printf("Nilai UAS: "); valid = scanf("%f",&uas);
+
+    if (!valid) {
+            printf("Input tidak valid. Harus berupa angka. Coba lagi.\n");
+            while (getchar() != '\n');
+        } else if (uas > 100) {
+            printf("Angka melebihi batas maksimal 100. Coba lagi.\n");
+        }
+    }
+    while (!valid || uas > 100);
+
+    float nilai_akhir = (tugas*0.2) + (uts*0.3) + (uas*0.5);
+
+    if (nilai_akhir >=90) {
+    printf("Nilai Akhir: %.2f, Predikat A", nilai_akhir);   
+    }
+    if ((nilai_akhir >=75)&&(nilai_akhir<90)) {
+    printf("Nilai Akhir: %.2f, Predikat B", nilai_akhir);   
+    }
+    if ((nilai_akhir >=60)&&(nilai_akhir<75)) {
+    printf("Nilai Akhir: %.2f, Predikat C", nilai_akhir);   
+    }
+    if (nilai_akhir <60) {
+    printf("Nilai Akhir: %.2f, Predikat D", nilai_akhir);   
+    }
+}
